@@ -6,7 +6,4 @@ version = "1.0.0"
 
 
 [script]
-name = "Milk Medals"
-id = "MilkMedal"
-version = "1.0.0"
 optional_dependencies = [ "UltimateMedalsExtended" ]
