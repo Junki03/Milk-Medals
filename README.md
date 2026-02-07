@@ -1,10 +1,10 @@
-🥛 Milk Medals for Trackmania 2020 🥛
+Milk Medals for Trackmania 2020
 
 Milk Medals is a bridge-difficulty plugin designed to fill the "no-man's land" between the Gold Medal and the Author Medal (AT).
 
 If Gold feels too easy but the Author feels impossible, it’s time to go for the Milk.
 
-🧪 The Formula 
+The Formula 
 
 The Medal is calculated using a 0.40 ratio (may change on feedback). 
 
@@ -16,38 +16,25 @@ Standard Tracks: It sits at 40% of the way from the Author Time toward the Gold 
 
 Short Tracks (Gap < 800ms): The plugin automatically switches to a 50/50 split to ensure the medal remains a distinct, achievable milestone.
 
-✨ Features
+Features
 
 Live Notifications: Get a custom "Milk Medal Earned!" toast notification when you archieve the time. (I also want to add a small audio cue but i can't understand how it works. Help is always welcome!!)
 
 UME Integration: Fully compatible with Ultimate Medals Extended, allowing the Milk Medal to appear alongside standard and other popular medals.
 
-Customizable:
+Toggle the standalone HUD.
 
- Toggle the standalone HUD.
+Show/Hide deltas.
 
- Show/Hide deltas.
+Goals
 
- Lock HUD position to prevent accidental dragging.
+-Add custom medal png on campaign menu
+-Make it so this medal can get used by challenges plugins. (Bingo, RACC, ect.)
+-Create my own "challenge" plugin that allows instant skip next map once medal archieved by one player in server (feel free to make it yourself if you want, contact me so we can add this tier aswell)
 
- Auto-hide when the game interface is toggled off.
+The main reason this plugin was created was to have a new tier difficulty while playing with my friends.
 
-📜 Changelog
-
-v1.0.0
-Initial Release: 
-
--Core "Milk Medal" logic implemented.
-
--Dynamic Scaling: Added logic to handle short maps (sub-800ms gaps) by defaulting to a 50/50 split.
-
--HUD Optimization: Added Delta tracking and interface-aware visibility.
-
--UME Support: Full integration with Ultimate Medals Extended for unified UI.
-
--Session Management: Implemented dictionary tracking to prevent notification spam.
-
-🤝 Credits
+Credits
 
 This is my firts project not only on OpenPlanet but on coding as a whole, it was a blast.
 

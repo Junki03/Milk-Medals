@@ -14,6 +14,9 @@ bool S_Locked = false;
 [Setting category="HUD" name="Show Toast Notifications"]
 bool S_ShowToasts = true;
 
+[Setting category="Debug" name="Reset Milked Maps"]
+bool S_ResetMilkedMaps = false;
+
 
 // Tracks session achievements, in order to not spam Toast Notification
 dictionary sessionMilkedMaps;
@@ -69,14 +72,61 @@ void OnDestroyed() {
 }
 #endif
 
+// Reset Setting Logic
+
+void CheckResetSetting() {
+    while (true) {
+        if (S_ResetMilkedMaps) {
+            ResetMilkedMaps();
+            S_ResetMilkedMaps = false;
+        }
+        sleep(100);
+    }
+}
+
+void ResetMilkedMaps() {
+    sessionMilkedMaps.DeleteAll();
+    string filePath = IO::FromStorageFolder("milked_maps.json");
+    Json::ToFile(filePath, Json::Object());
+    print("Milked maps reset!");
+}
+
+//Write maps "milked" to a json file that persist after restarting the game
+void SaveMilkedMaps() {
+    auto json = Json::Object();
+    auto keys = sessionMilkedMaps.GetKeys();
+    for (uint i = 0; i < keys.Length; i++) {
+        json[keys[i]] = true;
+    }
+    
+    string filePath = IO::FromStorageFolder("milked_maps.json");
+    Json::ToFile(filePath, json);
+}
+
+void LoadMilkedMaps() {
+    string filePath = IO::FromStorageFolder("milked_maps.json");
+    if (!IO::FileExists(filePath)) return;
+    
+    try {
+        auto json = Json::FromFile(filePath);
+        auto keys = json.GetKeys();
+        for (uint i = 0; i < keys.Length; i++) {
+            sessionMilkedMaps.Set(keys[i], true);
+        }
+        print("Loaded " + keys.Length + " milked maps from file");
+    } catch {
+        print("Error loading milked_maps.json");
+    }
+}
 
 void Main() {
 #if DEPENDENCY_ULTIMATEMEDALSEXTENDED
     UltimateMedalsExtended::AddMedal(MilkMedal());
 #endif
 
-
+    LoadMilkedMaps();
     startnew(PbLoop);
+    startnew(CheckResetSetting);
 }
 
 //Fort's pb loop shared on discord, not entirely sure how it works but it saves general pb on each map
@@ -90,7 +140,7 @@ void PbLoop() {
             auto scoreMgr = app.Network.ClientManiaAppPlayground.ScoreMgr;
             g_PbTime = scoreMgr.Map_GetRecord_v2(userId, currentUID, "PersonalBest", "", "TimeAttack", "");
 
-            // Toast Notification Trigger
+            // Toast Notification Trigger + checking if already notified
             if (S_ShowToasts && g_PbTime > 0) {
                 uint milkTime = CalculateMilkTime();
                 
@@ -99,6 +149,7 @@ void PbLoop() {
                     
                     if (!alreadyNotified) {
                         sessionMilkedMaps.Set(currentUID, true);
+                        SaveMilkedMaps();
                     }
                     
                  
