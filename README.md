@@ -1,4 +1,4 @@
-                                                      🥛 Milk Medals for Trackmania 2020 🥛
+🥛 Milk Medals for Trackmania 2020 🥛
 
 🌉Milk Medals is a bridge-difficulty plugin designed to fill the "no-man's land" between the Gold Medal and the Author Medal.
 
@@ -39,5 +39,6 @@ This is my first project not only on OpenPlanet but on coding as a whole it was 
 Special thanks to Ford and ArEyeses who helped me on the OpenPlanet Discord. 💻
 
 (I also used AI to understand stuff without spamming the Discord; the code has been changed and made readable as per request of the rules. Some parts still remained as I deemed them to be the best course of action.)
+
 
 
